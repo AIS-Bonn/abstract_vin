@@ -10,12 +10,12 @@ In detail, it contains implementations of
 - Value Iteration Networks on multiple levels of abstraction for 3D locomotion planning.
 
 
-Please see the see the respective paper for further information:
+Please see the respective paper for further information:
 "Value Iteration Networks on Multiple Levels of Abstraction" by Daniel Schleich, Tobias Klamt, and Sven Behnke.
 
 
 ## Installation
-This repository requires following packages:
+This repository requires the following packages:
 - [Python](https://www.python.org/) = 2.7
 - [PyTorch](http://pytorch.org/) >= 0.4.1
 - [Numpy](https://pypi.python.org/pypi/numpy) >= 1.14.3
@@ -28,16 +28,16 @@ Datasets for training and evaluation can be generated using the ```generate_data
 python generate_dataset.py --dim 2 --size 32
 ```
 **Flags**: 
-- `dim`: Dimensionality of the planning task: '2' for 2D grid worlds and '3' for 3D locomotion planning
-- `size`: The size of input maps. [32, 64]
-- `type`: Type of dataset. One of [training, validation, evaluation, all]. Default: 'all'
-- `num_grids`: Number of different grid worlds. If `type` is set to all, default values are used: 5000 for training and 715 each for validation and evaluation.
+- `dim`: Dimensionality of the planning task: '2' for 2D grid worlds and '3' for 3D locomotion planning.
+- `size`: The size of input maps. One of [32, 64].
+- `type`: Type of dataset. One of [training, validation, evaluation, all]. Default: 'all'.
+- `num_grids`: Number of different grid worlds. If `type` is set to 'all', default values are used: 5000 for training and 715 each for validation and evaluation.
 - `paths_per_grid`: Number of different paths for each grid world. Default: 7.
 - `num_workers`: Number of workers for parallel grid generation. Recommended: Set to number of CPU cores.
 
-## Train the Networks  (2D grid world)
+## Train the Networks
 The networks can be trained using the `train.py` script:
-#### VIN
+#### VIN (2D grid world)
 ```
 python train.py --dim 2 --net VIN --size 32 --iterations 100 --lr 0.001 --batch 128
 ```
@@ -58,9 +58,10 @@ python train.py --dim 3 --net Abstraction_VIN --size 32 --iterations 7 --lr 0.00
 ```
 
 **Flags**: 
-- `dim`: Dimensionality of the planning task: '2' for 2D grid worlds and '3' for 3D locomotion planning
-- `size`: The size of input maps. [32, 64]
+- `dim`: Dimensionality of the planning task: '2' for 2D grid worlds and '3' for 3D locomotion planning.
+- `size`: The size of input maps. One of [32, 64].
 - `net`: Network to be trained: For 2D grid worlds one of [VIN, HVIN, Abstraction_VIN]. For 3D only 'Abstraction_VIN'.
+- `iterations`: For 2D: Number of training epochs (default 1500). For 3D: Number of learning rate cycles (default: 7).
 - `batch`: Batch size. Default: 128.
 - `lr`: Learning rate. Default: 0.001.
 - `validation_step`: Number of epochs between two tests on the validation set (only for 2D).
@@ -92,10 +93,11 @@ python test.py --dim 2 --net Abstraction_VIN --size 32 --batch 128
 #### VIN on multiple abstraction levels (3D locomotion planning)
 ```
 python test.py --dim 3 --net Abstraction_VIN --size 32 --batch 128
+```
 
 **Flags**: 
-- `dim`: Dimensionality of the planning task: '2' for 2D grid worlds and '3' for 3D locomotion planning
-- `size`: The size of input maps. [32, 64]
+- `dim`: Dimensionality of the planning task: '2' for 2D grid worlds and '3' for 3D locomotion planning.
+- `size`: The size of input maps. One of [32, 64].
 - `net`: Network to be trained: For 2D grid worlds one of [VIN, HVIN, Abstraction_VIN]. For 3D only 'Abstraction_VIN'.
 - `batch`: Batch size. Default: 128.
 - `k`: Number of value iterations.
@@ -113,17 +115,19 @@ python visualize.py --dim 2 --size 32 --num 5
 #### 3D Locomotion Planning
 ```
 python visualize.py --dim 3 --size 32 --num 5
+```
 
 **Flags**: 
-- `dim`: Dimensionality of the planning task: '2' for 2D grid worlds and '3' for 3D locomotion planning
-- `size`: The size of input maps. [32, 64]
-- `num`: Number of different paths that shall be plotted. (Only if no explicit map and path ids are given)
+- `dim`: Dimensionality of the planning task: '2' for 2D grid worlds and '3' for 3D locomotion planning.
+- `size`: The size of input maps. One of [32, 64].
+- `num`: Number of different paths that shall be plotted. Only if no explicit map and path ids are given.
 - `map_id`: Index of the map that shall be plotted. If none is given, it will be chosen randomly.
 - `path_id`: Index of the path that shall be plotted. If none is given, it will be chosen randomly.
 
 
 ## Acknowledgement
 Many thanks to Kent Sommer, whose nice PyTorch implementation of Value Iteration Networks served as a starting point for our own implementations:
+
 https://github.com/kentsommer/pytorch-value-iteration-networks
 
 
