@@ -1,0 +1,12 @@
+# ignore compiled python files
+*.pyc
+
+#ignore learning curves and stat
+*.png
+*.txt
+
+#ignore kdev files
+*.kdev4
+
+#ignore networks and datasets
+*.pt
